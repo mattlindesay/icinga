@@ -2,7 +2,7 @@ class icinga::repo {
   
   if $icinga::with_repo {
     case $::operatingsystem {
-      RedHat,CentOS,ScientificLinux: {
+      'RedHat','CentOS','ScientificLinux': {
         yumrepo {'icinga-stable-release':
           baseurl  => 'http://packages.icinga.org/epel/$releasever/release/',
           enabled  => '1',
@@ -10,7 +10,7 @@ class icinga::repo {
           gpgkey   => 'http://packages.icinga.org/icinga.key',
         }
       }
-      Ubuntu: {
+      'Ubuntu': {
         exec{'icinga::repo::install':
           command => '/usr/bin/add-apt-repository ppa:formorer/icinga',
           creates => '/etc/apt/sources.list.d/formorer-icinga-trusty.list',
